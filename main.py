@@ -8,7 +8,7 @@ import base64, os
 
 
 API_URL = "https://api.telegram.org/bot"
-BOT_TOKEN = "8250500786:AAHhjCvbItIAbl0TJ8FyDoZjBHlLfCuwju8"
+BOT_TOKEN = ""
 
 
 bot = Bot(token=BOT_TOKEN)
