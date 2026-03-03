@@ -1,2 +1,7 @@
 aiofiles==25.1.0
 aiogram==3.25.0
+dotenv==1.2.1
+environs==14.6.0
+pandas==3.0.1
+numpy==2.4.2
+xlrd==2.0.2

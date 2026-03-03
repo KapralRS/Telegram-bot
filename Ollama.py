@@ -24,6 +24,7 @@ async def chat_ollama(text: str | None = None, img=None, model="gemma3:4b") -> s
                     return f"Ошибка в API ламы: {response.status}"
 
                 result = await response.json()
+                print(result.get("response"))
                 return result.get("response")
     except asyncio.TimeoutError:
         print("Ошибка: Превышен таймаут ожидания")
