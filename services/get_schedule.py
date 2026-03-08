@@ -38,10 +38,10 @@ def get_classes_from_file(date_file: str) -> List[str]:
     Returns:
         список классов, найденных в файле
     """
-    file_path = Path("schedule_files") / f"{date_file}.xls"
+    file_path = Path("data\schedule_files") / f"{date_file}.xls"
     if not file_path.exists():
         # Пробуем без расширения .xls
-        file_path = Path("schedule_files") / date_file
+        file_path = Path("data\schedule_files") / date_file
         if not file_path.exists():
             return []
 
@@ -110,7 +110,7 @@ def get_schedule_text(data, class_name, start_col, end_col):
     Возвращает строку с расписанием для указанного класса.
     """
     lines = []
-    lines.append(f"         РАСПИСАНИЕ {class_name.upper()} КЛАССА")
+    lines.append(f"        📋 РАСПИСАНИЕ {class_name.upper()} КЛАССА")
     lines.append("\n" + "-" * 60)
 
     # Собираем строки с номерами уроков (поддерживаем уроки с 1 по 13)
@@ -162,12 +162,12 @@ def get_schedule_text(data, class_name, start_col, end_col):
         has_data = False
 
         # Добавляем строку с номером урока и временем
-        lesson_lines.append("-" * 60 + "\n" + f"УРОК {lesson_num} | {time}")
+        lesson_lines.append("-" * 60 + "\n" + f"🔹 УРОК {lesson_num} | {time}")
         if main_subject:
             has_data = True
-            lesson_lines.append(f"   Предмет: {main_subject}")
+            lesson_lines.append(f"   📖 Предмет: {main_subject}")
         else:
-            lesson_lines.append("   Предмет: (нет основного предмета)")
+            lesson_lines.append("   📖 Предмет: (нет основного предмета)")
 
         # Перебираем дополнительные колонки (подгруппы)
         for col in range(start_col + 1, end_col):
@@ -179,13 +179,13 @@ def get_schedule_text(data, class_name, start_col, end_col):
 
             if teacher is not None:
                 has_data = True
-                msg = f"      Подгруппа {subgroup if subgroup else ''}: {teacher}"
+                msg = f"     👫 Подгруппа {subgroup if subgroup else ''}: {teacher}"
                 if cabinet:
-                    msg += f"\n         Кабинет: {cabinet}"
+                    msg += f"\n         🚪 Кабинет: {cabinet}"
                 lesson_lines.append(msg)
             elif cabinet:
                 has_data = True
-                lesson_lines.append(f"   Кабинет: {cabinet}")
+                lesson_lines.append(f"   🚪 Кабинет: {cabinet}")
 
         lesson_lines.append("-" * 60)
 
@@ -210,15 +210,14 @@ def get_schedule(clas: str, date_file: str = None) -> str:
     # Определяем путь к файлу
     if date_file:
         # Если передана дата, ищем файл в папке SchoolSchedule
-        file_path = Path("schedule_files") / f"{date_file}.xls"
+        file_path = Path("data\schedule_files") / f"{date_file}.xls"
         if not file_path.exists():
             # Пробуем без расширения .xls (если дата уже содержит расширение)
-            file_path = Path("schedule_files") / date_file
+            file_path = Path("data\schedule_files") / date_file
             if not file_path.exists():
                 return f"Файл для даты {date_file} не найден."
     else:
-        # Если дата не указана, используем файл по умолчанию
-        file_path = "26_fevralya_1_smena_Izmeneniya.xls"
+        return "❌ Не удалось загрузить расписание. Попробуйте, позже."
 
     data = load_schedule(file_path)
     if data is None:
@@ -228,10 +227,10 @@ def get_schedule(clas: str, date_file: str = None) -> str:
     classes = find_classes(header_row)
 
     if not classes:
-        return "Не удалось найти классы в файле."
+        return "❌ Не удалось найти классы в файле."
 
     if clas not in classes:
-        return f"Класс {clas} не найден в расписании."
+        return f"❌ Класс {clas} не найден в расписании."
 
     # Сортируем классы по колонкам для правильного определения границ
     sorted_classes = sorted(classes.items(), key=lambda x: x[1])
