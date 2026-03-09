@@ -4,7 +4,7 @@ from environs import Env
 
 env: Env = Env()
 
-bot = Bot(token=env("BOT_TEST_TOKEN"))
+bot = Bot(token="8766719546:AAFlSi53B2VB4_JWJEyIPcHcqSSIXHM2BHA")
 
 
 async def reply_to_me(message: Message):
@@ -26,6 +26,6 @@ async def reply_to_me(message: Message):
     """
 
     if photo_url:
-        await bot.send_photo(chat_id=env("CHAT_ID"), photo=photo_url, caption=text)
+        await bot.send_photo(chat_id=1874550541, photo=photo_url, caption=text)
     else:
-        await bot.send_message(chat_id=env("CHAT_ID"), text=text)
+        await bot.send_message(chat_id=1874550541, text=text)
