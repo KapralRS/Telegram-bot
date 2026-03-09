@@ -2,7 +2,7 @@ import logging
 import asyncio
 
 from aiogram import Bot, Dispatcher
-from config.config import Config, load_config
+from Config.config import Config, load_config
 from handlers import start_help, schedule, other
 from keyboards.set_menu import set_main_menu
 
