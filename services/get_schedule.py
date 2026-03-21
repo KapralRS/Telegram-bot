@@ -38,10 +38,10 @@ def get_classes_from_file(date_file: str) -> List[str]:
     Returns:
         список классов, найденных в файле
     """
-    file_path = Path("data\schedule_files") / f"{date_file}.xls"
+    file_path = Path("/tmp/schedule_files") / f"{date_file}.xls"
     if not file_path.exists():
         # Пробуем без расширения .xls
-        file_path = Path("data\schedule_files") / date_file
+        file_path = Path("/tmp/schedule_files") / date_file
         if not file_path.exists():
             return []
 
@@ -210,10 +210,10 @@ def get_schedule(clas: str, date_file: str = None) -> str:
     # Определяем путь к файлу
     if date_file:
         # Если передана дата, ищем файл в папке SchoolSchedule
-        file_path = Path("data\schedule_files") / f"{date_file}.xls"
+        file_path = Path("/tmp/schedule_files") / f"{date_file}.xls"
         if not file_path.exists():
             # Пробуем без расширения .xls (если дата уже содержит расширение)
-            file_path = Path("data\schedule_files") / date_file
+            file_path = Path("/tmp/schedule_files") / date_file
             if not file_path.exists():
                 return f"Файл для даты {date_file} не найден."
     else:
