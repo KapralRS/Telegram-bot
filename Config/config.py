@@ -28,6 +28,6 @@ class Config:
 def load_config(path: str | None = None) -> Config:
 
     return Config(
-        bot=TgBot(token=env("8250500786:AAHHma7KiuyyDTf-zp7mI2oqJNbOtZnDpME")),
+        bot=TgBot(token="8250500786:AAHHma7KiuyyDTf-zp7mI2oqJNbOtZnDpME"),
         log=LogSettings(level=LOG_LEVEL, format=LOG_FORMAT),
     )
