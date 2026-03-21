@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 class ScheduleDownloader:
     """Класс для скачивания файлов расписания"""
 
-    def __init__(self, save_dir: str = "data\schedule_files"):
+    def __init__(self, save_dir: str = "/tmp/schedule_files"):
         self.save_dir = save_dir
         self.downloaded_files = []
         self.last_download_time = None
